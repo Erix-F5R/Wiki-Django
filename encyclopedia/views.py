@@ -15,3 +15,18 @@ def page(request, title):
         "entry": util.get_entry(title)
     })
 
+def search(request):
+    
+
+    if  'q' in  request.GET:
+        query = request.GET['q']
+        list_entries = util.list_entries()
+
+        for entry in list_entries:
+            if query.upper() == entry.upper():
+                return render(request, "encyclopedia/page.html", {"entry": util.get_entry(entry)})
+
+        return render(request, "encyclopedia/search.html" ,{"query" : query} )
+    
+    else:
+        return render(request, "encyclopedia/search.html")
