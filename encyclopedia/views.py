@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django import forms
 
 from . import util
+
 
 
 def index(request):
@@ -40,3 +42,23 @@ def search(request):
     
     else:
         return render(request, "encyclopedia/search.html")
+
+def new_page(request):
+
+    if request.method == 'POST':
+        form = NewPageForm(request.POST)
+        
+        if form.is_valid():
+
+            body = form.cleaned_data["new_body"]
+            title = form.cleaned_data["new_title"]
+            util.save_entry(title,body)
+
+            # redirect to a new URL:
+            return HttpResponseRedirect('http://127.0.0.1:8000/')
+
+    return render(request, "encyclopedia/new_page.html", {"form": NewPageForm()})
+
+class NewPageForm(forms.Form):
+    new_title = forms.CharField(label='Title')
+    new_body = forms.CharField(label='Type new entry here')
