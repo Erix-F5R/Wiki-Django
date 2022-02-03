@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block body %}
+    <h1>You searched for...</h1>  
+    {% if query %}
+        <p> {{ query }}</p>   
+        {% if entry %}
+            <p> {{ entry }}</p>        
+        {% endif %}     
+    {% else %}
+        <p> 404 </p>
+    {% endif %}
+
+
+{% endblock %}
