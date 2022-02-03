@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django import forms
 
 from . import util
@@ -35,7 +35,7 @@ def search(request):
         
 
         if partial_match:
-            print("$$HELLO$$")
+            
             return render(request, "encyclopedia/search.html" ,{"query": query ,"entry" : partial_match} )
 
         return render(request, "encyclopedia/search.html" ,{"query" : query} )
@@ -55,7 +55,7 @@ def new_page(request):
             util.save_entry(title,body)
 
             # redirect to a new URL:
-            return HttpResponseRedirect('http://127.0.0.1:8000/')
+            return page(request, title)
 
     return render(request, "encyclopedia/new_page.html", {"form": NewPageForm()})
 
