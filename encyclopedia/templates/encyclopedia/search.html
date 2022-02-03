@@ -10,7 +10,7 @@
         {% if entry %}
 
             {% for item in entry %}
-                <a href="http://127.0.0.1:8000/wiki/{{item}}" >{{ item }}</a><br>
+                <a href="{% url 'page' item %}" >{{ item }}</a><br>
             {% endfor %}   
         
         {% else %}
