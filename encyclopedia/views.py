@@ -22,9 +22,19 @@ def search(request):
         query = request.GET['q']
         list_entries = util.list_entries()
 
+## Perfect Match
         for entry in list_entries:
             if query.upper() == entry.upper():
                 return page(request, entry)
+
+## Partial Match
+        partial_match = [entry for entry in list_entries if query.upper() in entry.upper()]
+
+        
+
+        if partial_match:
+            print("$$HELLO$$")
+            return render(request, "encyclopedia/search.html" ,{"query": query ,"entry" : partial_match} )
 
         return render(request, "encyclopedia/search.html" ,{"query" : query} )
     

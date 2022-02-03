@@ -6,11 +6,19 @@
 
 {% block body %}
     <h1>You searched for...</h1>  
-    {% if query %}
-        <p> {{ query }}</p>   
+    {% if query %}          
         {% if entry %}
-            <p> {{ entry }}</p>        
+
+            {% for item in entry %}
+                <a href="http://127.0.0.1:8000/wiki/{{item}}" >{{ item }}</a><br>
+            {% endfor %}   
+        
+        {% else %}
+
+            <p> {{ query }} not found. Try searching again</p>
+
         {% endif %}     
+
     {% else %}
         <p> 404 </p>
     {% endif %}
