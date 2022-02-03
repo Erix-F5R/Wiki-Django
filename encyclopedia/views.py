@@ -24,7 +24,7 @@ def search(request):
 
         for entry in list_entries:
             if query.upper() == entry.upper():
-                return render(request, "encyclopedia/page.html", {"entry": util.get_entry(entry)})
+                return page(request, entry)
 
         return render(request, "encyclopedia/search.html" ,{"query" : query} )
     
