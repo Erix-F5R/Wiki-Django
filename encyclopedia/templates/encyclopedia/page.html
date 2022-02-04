@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    <h1>Title</h1>
 
     
     {% if entry == None %}
         <p> Page not found :( </p>
     {% else%}
         {{ entry }}
+
+        <a href="{% url 'edit-page' %}">Edit Page</a>
+
     {% endif %}
     
    

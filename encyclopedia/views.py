@@ -62,3 +62,16 @@ def new_page(request):
 class NewPageForm(forms.Form):
     new_title = forms.CharField(label='Title')
     new_body = forms.CharField(label='Type new entry here')
+
+def edit_page(request, title): 
+
+    return render(request, "encyclopedia/edit.html", {"form": EditPageForm(initial={'new_title':title, 'new_body': util.get_entry(title) })})
+    
+
+class EditPageForm(forms.Form):
+
+    
+    new_title = forms.CharField(label='Edit Title' )
+    new_body = forms.CharField(label='Edit entry here', widget=forms.Textarea)
+
+
