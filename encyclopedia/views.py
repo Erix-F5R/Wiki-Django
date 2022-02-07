@@ -14,6 +14,7 @@ def index(request):
 def page(request, title):
         
         return render(request, "encyclopedia/page.html", {
+        "title":title,
         "entry": util.get_entry(title)
     })
 
@@ -64,6 +65,18 @@ class NewPageForm(forms.Form):
     new_body = forms.CharField(label='Type new entry here')
 
 def edit_page(request, title): 
+    if request.method == 'POST':
+        form = EditPageForm(request.POST)
+
+        if form.is_valid():
+            
+            body = form.cleaned_data["new_body"]
+            title = form.cleaned_data["new_title"]
+            
+            util.save_entry(title,body)
+
+            return page(request, title)        
+
 
     return render(request, "encyclopedia/edit.html", {"form": EditPageForm(initial={'new_title':title, 'new_body': util.get_entry(title) })})
     
