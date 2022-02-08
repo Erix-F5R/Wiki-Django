@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>You searched for...</h1>  
+    
     {% if query %}          
         {% if entry %}
 
@@ -15,7 +15,7 @@
         
         {% else %}
 
-            <p> {{ query }} not found. Try searching again</p>
+            <h2> {{ query }} not found. Try searching again</h2>
 
         {% endif %}     
 
