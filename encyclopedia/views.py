@@ -4,6 +4,10 @@ from django import forms
 
 from . import util
 
+import random as rnd
+
+
+
 
 
 def index(request):
@@ -88,3 +92,9 @@ class EditPageForm(forms.Form):
     new_body = forms.CharField(label='Edit entry here', widget=forms.Textarea)
 
 
+def random(request):
+    
+    rnd.seed()
+
+    all_entries = util.list_entries()
+    return page(request, all_entries[rnd.randint(0 , len(all_entries)-1 )])
